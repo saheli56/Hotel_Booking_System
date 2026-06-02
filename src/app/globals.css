@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/* ─── shadcn-style CSS variables ───────────────────────────── */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 243 75% 59%;
+  --primary: 243 75% 59%;
+  --primary-foreground: 0 0% 100%;
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Indigo primary */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-light: #eef2ff;
+  --color-primary-muted: #818cf8;
+
+  /* Zinc palette (shadcn default) */
+  --color-zinc-50:  #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #ffffff;
+  color: #18181b;
+  font-family: var(--font-geist-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #f4f4f5; }
+::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 3px; }
+
+/* ─── Animations ───────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+@keyframes beam {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+.animate-fade-up   { animation: fadeUp  0.45s cubic-bezier(.22,1,.36,1) forwards; }
+.animate-fade-in   { animation: fadeIn  0.35s ease forwards; }
+.animate-scale-in  { animation: scaleIn 0.3s  cubic-bezier(.22,1,.36,1) forwards; }
+
+/* ─── Aceternity grid pattern ──────────────────────────────── */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dot-pattern {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ─── Glow effects ─────────────────────────────────────────── */
+.glow-indigo {
+  background: radial-gradient(ellipse at 50% 0%, rgba(79,70,229,0.35) 0%, transparent 65%);
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(79,70,229,0.3), transparent, rgba(79,70,229,0.1));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.glow-card:hover::before { opacity: 1; }
+
+/* ─── Shimmer text ─────────────────────────────────────────── */
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #a5b4fc 0%,
+    #818cf8 20%,
+    #ffffff 40%,
+    #818cf8 60%,
+    #a5b4fc 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── Border beam ──────────────────────────────────────────── */
+.border-beam::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%; height: 2px;
+  background: linear-gradient(90deg, transparent, #6366f1, transparent);
+  animation: beam 2.5s ease-in-out infinite;
+}
+
+/* ─── shadcn card ──────────────────────────────────────────── */
+.card-base {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 0.75rem;
+}
+
+.card-hover {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.card-hover:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 4px 24px -4px rgba(79,70,229,0.12);
+  transform: translateY(-1px);
+}
+
+/* ─── Section spacing ──────────────────────────────────────── */
+.section-pad { padding-top: 5rem; padding-bottom: 5rem; }
+@media (max-width: 768px) {
+  .section-pad { padding-top: 3rem; padding-bottom: 3rem; }
+}
+
+/* ─── No-scrollbar ─────────────────────────────────────────── */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ─── Badge variants ───────────────────────────────────────── */
+.badge-indigo {
+  display: inline-flex; align-items: center; gap: 0.375rem;
+  background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe;
+  padding: 0.2rem 0.65rem; border-radius: 9999px;
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.03em;
+}
+.badge-green  { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
+.badge-yellow { background:#fefce8; color:#a16207; border:1px solid #fef08a; }
+.badge-red    { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
+
+/* ─── Pulse dot ────────────────────────────────────────────── */
+.pulse-dot {
+  width: 6px; height: 6px;
+  border-radius: 9999px;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34,197,94,0.4);
+  animation: pulse-ring 2s ease infinite;
+}
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+  70%  { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
